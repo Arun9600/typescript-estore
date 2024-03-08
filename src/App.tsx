@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Shop from "./components/Shop";
 import EmptyPage from "./components/EmptyPage";
+import ProductDetails from "./components/ProductDetails";
 const App = () => {
   const theme = createTheme({
     typography: {
@@ -39,6 +40,7 @@ const App = () => {
             <Route path="/" element={<Nav />}>
               <Route path="/" index element={<Home />} />
               <Route path="/shop" element={<Shop />} />
+              <Route path="/productdetail" element={<ProductDetails />} />
               <Route path="*" element={<EmptyPage />} />
             </Route>
           </Routes>

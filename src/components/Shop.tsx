@@ -2,14 +2,20 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../features/hooks";
 import { getProductsDataInList } from "../features/ProductsListSlice";
 import { productsListDatas } from "../App.types";
+import { productDetailsFunc } from "../features/ProductsDetailsSlice";
 import { Box, Container, Grid, Typography, Button } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { useNavigate } from "react-router-dom";
 const Shop = () => {
   const dispatch = useAppDispatch();
   const datas = useAppSelector((state) => state.productsList.datas);
   useEffect(() => {
     dispatch(getProductsDataInList());
   }, [dispatch]);
+  const productDetailEvent = (productId: number) => {
+    dispatch(productDetailsFunc(productId));
+  };
+  const navigate = useNavigate();
   return (
     <>
       <Box sx={{ padding: "40px 0" }}>
@@ -100,7 +106,14 @@ const Shop = () => {
                     </Box>
                     <Grid container>
                       <Grid item xl={6} lg={6} md={6} sm={6} xs={6}>
-                        <Button variant="outlined" color="success">
+                        <Button
+                          variant="outlined"
+                          color="success"
+                          onClick={() => {
+                            productDetailEvent(item.id);
+                            navigate(`/productdetail/${item.title}`);
+                          }}
+                        >
                           View Product
                         </Button>
                       </Grid>
