@@ -5,3 +5,15 @@ export type productsListDatas = {
   category: string;
   image: string;
 };
+
+export type productsSliceInitialState = {
+  datas: [] | null;
+};
+
+export type productsCatergoriesSliceInitialState = {
+  datas: [] | null;
+};
+
+export type limitResultsSliceInitialState = {
+  datas: [] | null;
+};

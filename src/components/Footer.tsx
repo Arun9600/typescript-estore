@@ -1,0 +1,21 @@
+import { Box, Container, Grid, Typography } from "@mui/material";
+import { YearFunc } from "../utils";
+const Footer = () => {
+  return (
+    <>
+      <Box sx={{ backgroundColor: "#000", padding: "10px 0" }}>
+        <Container>
+          <Grid container>
+            <Grid item xl={12} lg={12} md={12} sx={{ textAlign: "center" }}>
+              <Typography variant="body1" style={{ color: "#fff" }}>
+                Copyrights &copy; {YearFunc()} Designed and Developed by Arun
+              </Typography>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+    </>
+  );
+};
+
+export default Footer;

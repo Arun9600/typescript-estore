@@ -1,8 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { productsListDatas } from "../App.types";
 import { BASE_URL } from "../utils";
+import { productsSliceInitialState } from "../App.types";
 
-const initialState: productsListDatas[] = [];
+const initialState: productsSliceInitialState = {
+  datas: [],
+};
 
 const ProductsListSlice = createSlice({
   name: "productsList",
@@ -10,7 +12,7 @@ const ProductsListSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getProductsDataInList.fulfilled, (state, action) => {
-      state = action.payload;
+      state.datas = action.payload;
     });
   },
 });
