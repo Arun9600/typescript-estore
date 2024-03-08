@@ -111,7 +111,7 @@ const Shop = () => {
                           color="success"
                           onClick={() => {
                             productDetailEvent(item.id);
-                            navigate(`/productdetail/${item.title}`);
+                            navigate(`/productdetail`);
                           }}
                         >
                           View Product
