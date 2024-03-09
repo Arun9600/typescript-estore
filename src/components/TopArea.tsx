@@ -5,13 +5,24 @@ const TopArea = () => {
     <>
       <Box sx={{ backgroundColor: "#000", padding: "10px 0" }}>
         <Container>
-          <Grid container>
+          <Grid
+            container
+            style={{ alignItems: "center", justifyContent: "center" }}
+          >
             <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
               <Typography variant="body1" style={{ color: "#fff" }}>
                 React with TypeScript
               </Typography>
             </Grid>
-            <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+            <Grid
+              item
+              xl={6}
+              lg={6}
+              md={6}
+              sm={12}
+              xs={12}
+              style={{ textAlign: "center" }}
+            >
               <Menu />
             </Grid>
           </Grid>

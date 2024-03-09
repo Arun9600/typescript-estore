@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import Shop from "./components/Shop";
 import EmptyPage from "./components/EmptyPage";
 import ProductDetails from "./components/ProductDetails";
+import Cart from "./components/Cart";
 const App = () => {
   const theme = createTheme({
     typography: {
@@ -41,6 +42,7 @@ const App = () => {
               <Route path="/" index element={<Home />} />
               <Route path="/shop" element={<Shop />} />
               <Route path="/productdetail" element={<ProductDetails />} />
+              <Route path="/cart" element={<Cart />} />
               <Route path="*" element={<EmptyPage />} />
             </Route>
           </Routes>

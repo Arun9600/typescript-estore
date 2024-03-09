@@ -3,6 +3,7 @@ import ProductsListSlice from "./ProductsListSlice";
 import ProductsCategoriesSlice from "./ProductsCategoriesSlice";
 import ProductsLimitSlice from "./ProductsLimitSlice";
 import ProductDetailsSlice from "./ProductsDetailsSlice";
+import CartSlice from "./CartSlice";
 import { useDispatch } from "react-redux";
 
 const store = configureStore({
@@ -11,6 +12,7 @@ const store = configureStore({
     prodcutsCategories: ProductsCategoriesSlice,
     limitResults: ProductsLimitSlice,
     productDetails: ProductDetailsSlice,
+    cart: CartSlice,
   },
 });
 

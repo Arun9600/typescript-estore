@@ -29,3 +29,6 @@ ul.nav-menu {
   color: #fff;
   text-decoration: underline;
 }
+.nav-menu svg {
+  vertical-align: middle;
+}

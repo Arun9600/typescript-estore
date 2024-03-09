@@ -96,7 +96,7 @@ const ProductsLimit = () => {
                   </Box>
                 </Grid>
               ))}
-            <Grid item xl={12} style={{ textAlign: "center" }}>
+            <Grid item xl={12} md={12} sm={12} style={{ textAlign: "center" }}>
               <Button
                 color="success"
                 variant="outlined"

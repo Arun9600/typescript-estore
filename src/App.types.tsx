@@ -25,3 +25,17 @@ export type productsDetailData = {
   description: string;
   image: string;
 };
+
+export type cartSliceInitialState = {
+  datas: [] | null;
+};
+
+export type CartData = {
+  id: number;
+  title: string;
+  price: string;
+  category: string;
+  description: string;
+  image: string;
+  qty?: number | undefined;
+};
