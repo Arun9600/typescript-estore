@@ -1,7 +1,11 @@
+import { Box, Typography } from "@mui/material";
+
 const EmptyPage = () => {
   return (
     <>
-      <h1>Page Not Found</h1>
+      <Box sx={{ textAlign: "center", padding: "40px 0" }}>
+        <Typography variant="h4">Page not Found</Typography>
+      </Box>
     </>
   );
 };

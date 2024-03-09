@@ -24,6 +24,10 @@ export type productsDetailData = {
   category: string;
   description: string;
   image: string;
+  rating?: {
+    count?: number | null;
+    rate?: number | null;
+  };
 };
 
 export type cartSliceInitialState = {
@@ -33,9 +37,7 @@ export type cartSliceInitialState = {
 export type CartData = {
   id: number;
   title: string;
-  price: string;
-  category: string;
-  description: string;
+  price: string | number;
   image: string;
   qty?: number | undefined;
 };

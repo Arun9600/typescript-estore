@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { useAppSelector } from "../features/hooks";
 const Menu = () => {
+  const data = useAppSelector((state) => state.cart.datas);
   return (
     <>
       <ul className="nav-menu">
@@ -13,6 +15,7 @@ const Menu = () => {
         <li>
           <Link to="/cart">
             <AddShoppingCartIcon />
+            {data && data.length}
           </Link>
         </li>
       </ul>

@@ -5,7 +5,10 @@ import { productsListDatas } from "../App.types";
 import { productDetailsFunc } from "../features/ProductsDetailsSlice";
 import { Box, Container, Grid, Typography, Button } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { CartData } from "../App.types";
+import { add } from "../features/CartSlice";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 const Shop = () => {
   const dispatch = useAppDispatch();
   const datas = useAppSelector((state) => state.productsList.datas);
@@ -14,6 +17,9 @@ const Shop = () => {
   }, [dispatch]);
   const productDetailEvent = (productId: number) => {
     dispatch(productDetailsFunc(productId));
+  };
+  const addToCart = (data: CartData) => {
+    dispatch(add(data));
   };
   const navigate = useNavigate();
   return (
@@ -26,6 +32,8 @@ const Shop = () => {
               xl={12}
               lg={12}
               md={12}
+              sm={12}
+              xs={12}
               style={{ textAlign: "center", marginBottom: "20px" }}
             >
               <Typography
@@ -37,23 +45,14 @@ const Shop = () => {
             </Grid>
             {datas &&
               datas.map((item: productsListDatas) => (
-                <Grid
-                  item
-                  xl={4}
-                  lg={4}
-                  md={6}
-                  sm={6}
-                  xs={12}
-                  sx={{ marginBottom: "30px" }}
-                  key={item.id}
-                >
+                <Grid item xl={4} lg={4} md={6} sm={6} xs={12} key={item.id}>
                   <Box style={{ padding: "30px" }}>
                     <Box>
                       <img
                         src={item.image}
                         alt={item.title}
                         style={{
-                          width: "350px",
+                          width: "100%",
                           height: "300px",
                           marginBottom: "20px",
                           objectFit: "cover",
@@ -91,16 +90,23 @@ const Shop = () => {
                     <Box>
                       <Grid container>
                         <Grid item xl={12}>
-                          <Typography
-                            variant="h2"
-                            style={{
-                              fontSize: "16px",
-                              fontWeight: "bold",
-                              marginBottom: "20px",
-                            }}
-                          >
-                            {item.title}
-                          </Typography>
+                          <Link to={`/productdetail/${item.title}`}>
+                            <Typography
+                              variant="h2"
+                              style={{
+                                fontSize: "16px",
+                                fontWeight: "bold",
+                                marginBottom: "20px",
+                                color: "#000",
+                                textDecoration: "none",
+                              }}
+                              onClick={() => {
+                                productDetailEvent(item.id);
+                              }}
+                            >
+                              {item.title}
+                            </Typography>
+                          </Link>
                         </Grid>
                       </Grid>
                     </Box>
@@ -111,7 +117,7 @@ const Shop = () => {
                           color="success"
                           onClick={() => {
                             productDetailEvent(item.id);
-                            navigate(`/productdetail`);
+                            navigate(`/productdetail/${item.title}`);
                           }}
                         >
                           View Product
@@ -128,6 +134,7 @@ const Shop = () => {
                       >
                         <AddShoppingCartIcon
                           sx={{ color: "#2e7d32", cursor: "pointer" }}
+                          onClick={() => addToCart(item)}
                         />
                       </Grid>
                     </Grid>

@@ -19,23 +19,47 @@ const ProductDetails = () => {
             container
             style={{ alignItems: "center", justifyContent: "center" }}
           >
-            <Grid item xl={4} lg={4} md={3} sm={12} xs={12}>
+            <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
               <img
                 src={data?.image}
                 alt={data?.title}
                 style={{ width: "350px", height: "300px", objectFit: "cover" }}
               />
             </Grid>
-            <Grid item xl={8} lg={8} md={9} sm={12} xs={12}>
+            <Grid item xl={8} lg={8} md={8} sm={12} xs={12}>
               <Box sx={{ marginBottom: "15px" }}>
-                <Typography variant="h6">{data.title}</Typography>
+                <Typography
+                  variant="h4"
+                  style={{ fontSize: "20px", fontWeight: "bold" }}
+                >
+                  {data?.title}
+                </Typography>
+              </Box>
+              <Box>
+                <Typography
+                  variant="body1"
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    marginBottom: "15px",
+                  }}
+                >
+                  Category: {data?.category?.toUpperCase()}
+                </Typography>
               </Box>
               <Box>
                 <Typography variant="body1" style={{ marginBottom: "15px" }}>
-                  {data.description}
+                  {data?.description}
                 </Typography>
-                <Typography variant="h5" style={{ marginBottom: "15px" }}>
-                  Rs.{data.price}
+                <Typography
+                  variant="h4"
+                  style={{
+                    marginBottom: "15px",
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Pirce: Rs.{data?.price}
                 </Typography>
               </Box>
               <Button
