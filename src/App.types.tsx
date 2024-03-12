@@ -10,9 +10,13 @@ export type productsSliceInitialState = {
 };
 export type productsCatergoriesSliceInitialState = {
   datas: [] | null;
+  loading: boolean;
+  error: string;
 };
 export type limitResultsSliceInitialState = {
   datas: [] | null;
+  loading: boolean;
+  error: string;
 };
 export type productsDetailsSliceInitialSlice = {
   datas: {} | null;

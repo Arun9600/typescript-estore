@@ -5,10 +5,13 @@ import { useAppDispatch, useAppSelector } from "../features/hooks";
 import { limitResultsApiFunc } from "../features/ProductsLimitSlice";
 import { productsListDatas } from "../App.types";
 import { productDetailsFunc } from "../features/ProductsDetailsSlice";
+import ProductsListSkeleton from "./ProductsListSkeleton";
 import { Link } from "react-router-dom";
 const ProductsLimit = () => {
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.limitResults.datas);
+  const loading = useAppSelector((state) => state.limitResults.loading);
+  const error = useAppSelector((state) => state.limitResults.error);
   const productDetailEvent = (productId: number) => {
     dispatch(productDetailsFunc(productId));
   };
@@ -41,89 +44,110 @@ const ProductsLimit = () => {
                 Our Top Products
               </Typography>
             </Grid>
-            {data
-              ? data &&
-                data.map((item: productsListDatas) => (
-                  <Grid item xl={4} lg={4} md={4} sm={6} xs={12} key={item.id}>
-                    <Box sx={{ padding: "30px" }}>
-                      <Box>
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          style={{
-                            width: "100%",
-                            height: "300px",
-                            marginBottom: "20px",
-                            objectFit: "cover",
-                          }}
-                        />
-                      </Box>
-                      <Box sx={{ marginBottom: "10px" }}>
-                        <Grid container>
-                          <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                            <Typography
-                              variant="h6"
-                              style={{ fontSize: "14px", color: "#000" }}
-                            >
-                              {item.category.toUpperCase()}
-                            </Typography>
-                          </Grid>
-                          <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                            <Typography
-                              variant="h6"
-                              style={{ fontSize: "14px", color: "#000" }}
-                            >
-                              Rs. {item.price}
-                            </Typography>
-                          </Grid>
+            {loading ? (
+              <ProductsListSkeleton />
+            ) : (
+              data &&
+              data.map((item: productsListDatas) => (
+                <Grid item xl={4} lg={4} md={4} sm={6} xs={12} key={item.id}>
+                  <Box sx={{ padding: "30px" }}>
+                    <Box>
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        style={{
+                          width: "100%",
+                          height: "300px",
+                          marginBottom: "20px",
+                          objectFit: "cover",
+                        }}
+                      />
+                    </Box>
+                    <Box sx={{ marginBottom: "10px" }}>
+                      <Grid container>
+                        <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                          <Typography
+                            variant="h6"
+                            style={{ fontSize: "14px", color: "#000" }}
+                          >
+                            {item.category.toUpperCase()}
+                          </Typography>
                         </Grid>
-                      </Box>
-                      <Box>
-                        <Grid container>
-                          <Grid item xl={12}>
-                            <Link
-                              to={`/productdetail/${item.title}`}
-                              onClick={() => {
-                                productDetailEvent(item.id);
+                        <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                          <Typography
+                            variant="h6"
+                            style={{ fontSize: "14px", color: "#000" }}
+                          >
+                            Rs. {item.price}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </Box>
+                    <Box>
+                      <Grid container>
+                        <Grid item xl={12}>
+                          <Link
+                            to={`/productdetail/${item.title}`}
+                            onClick={() => {
+                              productDetailEvent(item.id);
+                            }}
+                          >
+                            <Typography
+                              variant="h2"
+                              style={{
+                                fontSize: "16px",
+                                fontWeight: "bold",
+                                color: "#000",
+                                cursor: "pointer",
                               }}
                             >
-                              <Typography
-                                variant="h2"
-                                style={{
-                                  fontSize: "16px",
-                                  fontWeight: "bold",
-                                  color: "#000",
-                                  cursor: "pointer",
-                                }}
-                              >
-                                {item.title}
-                              </Typography>
-                            </Link>
-                          </Grid>
+                              {item.title}
+                            </Typography>
+                          </Link>
                         </Grid>
-                      </Box>
+                      </Grid>
                     </Box>
-                  </Grid>
-                ))
-              : ""}
-            {data ? (
+                  </Box>
+                </Grid>
+              ))
+            )}
+
+            {error ? (
               <Grid
                 item
                 xl={12}
+                lg={12}
                 md={12}
                 sm={12}
-                style={{ textAlign: "center" }}
+                xs={12}
+                style={{ textAlign: "center", padding: "30px " }}
               >
-                <Button
-                  color="success"
-                  variant="outlined"
-                  onClick={() => navigate("/shop")}
-                >
-                  View All Products
-                </Button>
+                {error}
               </Grid>
             ) : (
               ""
+            )}
+
+            {data && data.length === 0 ? (
+              " "
+            ) : (
+              <>
+                <Grid
+                  item
+                  xl={12}
+                  md={12}
+                  sm={12}
+                  style={{ textAlign: "center" }}
+                >
+                  <Button
+                    color="success"
+                    variant="outlined"
+                    onClick={() => navigate("/shop")}
+                  >
+                    View All Products
+                  </Button>
+                </Grid>
+              </>
             )}
           </Grid>
         </Container>

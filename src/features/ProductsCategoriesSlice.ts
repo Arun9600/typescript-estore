@@ -4,6 +4,8 @@ import { BASE_URL } from "../utils";
 
 const initialState: productsCatergoriesSliceInitialState = {
   datas: [],
+  loading: true,
+  error: "",
 };
 
 const ProductsCatergoriesSlice = createSlice({
@@ -13,6 +15,16 @@ const ProductsCatergoriesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(prodcutsCategoriesFunc.fulfilled, (state, action) => {
       state.datas = action.payload;
+      state.loading = false;
+      state.error = "";
+    });
+    builder.addCase(prodcutsCategoriesFunc.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(prodcutsCategoriesFunc.rejected, (state) => {
+      state.error = "Error in fecthing details";
+      state.loading = false;
     });
   },
 });

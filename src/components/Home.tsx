@@ -3,9 +3,12 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../features/hooks";
 import { prodcutsCategoriesFunc } from "../features/ProductsCategoriesSlice";
 import ProductsLimit from "./ProductsLimit";
+import ProductsCategoriesSkeleton from "./ProductsCategoriesSkeleton";
 const Home = () => {
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.prodcutsCategories.datas);
+  const loading = useAppSelector((state) => state.prodcutsCategories.loading);
+  const error = useAppSelector((state) => state.prodcutsCategories.error);
   useEffect(() => {
     dispatch(prodcutsCategoriesFunc());
   }, [dispatch]);
@@ -31,7 +34,10 @@ const Home = () => {
                 Our Products Categories
               </Typography>
             </Grid>
-            {data &&
+            {loading ? (
+              <ProductsCategoriesSkeleton />
+            ) : (
+              data &&
               data.map((item: string) => (
                 <Grid
                   item
@@ -57,7 +63,23 @@ const Home = () => {
                     {item.toUpperCase()}
                   </Typography>
                 </Grid>
-              ))}
+              ))
+            )}
+            {error ? (
+              <Grid
+                item
+                xl={12}
+                lg={12}
+                md={12}
+                sm={12}
+                xs={12}
+                style={{ textAlign: "center", padding: "30px " }}
+              >
+                {error}
+              </Grid>
+            ) : (
+              ""
+            )}
           </Grid>
         </Container>
       </Box>

@@ -4,6 +4,8 @@ import { BASE_URL } from "../utils";
 
 const initialState: limitResultsSliceInitialState = {
   datas: [],
+  loading: true,
+  error: "",
 };
 
 const limitResultsSlice = createSlice({
@@ -13,6 +15,16 @@ const limitResultsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(limitResultsApiFunc.fulfilled, (state, action) => {
       state.datas = action.payload;
+      state.loading = false;
+      state.error = "";
+    });
+    builder.addCase(limitResultsApiFunc.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(limitResultsApiFunc.rejected, (state) => {
+      state.loading = false;
+      state.error = "Error in fetching data";
     });
   },
 });
