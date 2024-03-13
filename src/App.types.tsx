@@ -7,6 +7,8 @@ export type productsListDatas = {
 };
 export type productsSliceInitialState = {
   datas: [] | null;
+  loading: boolean;
+  error: string;
 };
 export type productsCatergoriesSliceInitialState = {
   datas: [] | null;
@@ -20,6 +22,8 @@ export type limitResultsSliceInitialState = {
 };
 export type productsDetailsSliceInitialSlice = {
   datas: {} | null;
+  loading: boolean;
+  error: string;
 };
 export type productsDetailData = {
   id: number;
@@ -36,6 +40,8 @@ export type productsDetailData = {
 
 export type cartSliceInitialState = {
   datas: [] | null;
+  loading: boolean;
+  error: string;
 };
 
 export type CartData = {

@@ -10,6 +10,7 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Skeleton,
 } from "@mui/material";
 import { useAppSelector, useAppDispatch } from "../features/hooks";
 import { CartData } from "../App.types";
@@ -29,6 +30,7 @@ const Cart = () => {
     dispatch(decreaseQty(item));
   };
   const data = useAppSelector((state) => state.cart.datas);
+  const loading = useAppSelector((state) => state.cart.loading);
   const Total = data?.reduce(
     (acc, item: CartData) =>
       (acc as number) + (item.price as number) * (item.qty || 0),
@@ -98,7 +100,10 @@ const Cart = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {data &&
+                        {loading ? (
+                          <Skeleton variant="text" sx={{ fontSize: "1rem" }} />
+                        ) : (
+                          data &&
                           data.map((item: CartData) => (
                             <TableRow
                               key={item.id}
@@ -151,7 +156,8 @@ const Cart = () => {
                                 />
                               </TableCell>
                             </TableRow>
-                          ))}
+                          ))
+                        )}
                       </TableBody>
                     </Table>
                   </TableContainer>

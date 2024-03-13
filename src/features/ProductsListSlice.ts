@@ -4,6 +4,8 @@ import { productsSliceInitialState } from "../App.types";
 
 const initialState: productsSliceInitialState = {
   datas: [],
+  loading: true,
+  error: "",
 };
 
 const ProductsListSlice = createSlice({
@@ -13,6 +15,16 @@ const ProductsListSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getProductsDataInList.fulfilled, (state, action) => {
       state.datas = action.payload;
+      state.loading = false;
+      state.error = "";
+    });
+    builder.addCase(getProductsDataInList.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(getProductsDataInList.rejected, (state) => {
+      state.loading = false;
+      state.error = "Error in Fetching Data";
     });
   },
 });

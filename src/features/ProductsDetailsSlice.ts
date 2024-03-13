@@ -4,6 +4,8 @@ import { BASE_URL } from "../utils";
 
 const initialState: productsDetailsSliceInitialSlice = {
   datas: {},
+  loading: true,
+  error: "",
 };
 
 const ProductDetailsSlice = createSlice({
@@ -13,6 +15,16 @@ const ProductDetailsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(productDetailsFunc.fulfilled, (state, action) => {
       state.datas = action.payload;
+      state.loading = false;
+      state.error = "";
+    });
+    builder.addCase(productDetailsFunc.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(productDetailsFunc.rejected, (state) => {
+      state.loading = false;
+      state.error = "Error in Fetchin Data..!!!";
     });
   },
 });

@@ -5,6 +5,7 @@ import { productsListDatas } from "../App.types";
 import { productDetailsFunc } from "../features/ProductsDetailsSlice";
 import { Box, Container, Grid, Typography, Button } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import ProductsListSkeleton from "./ProductsListSkeleton";
 import { CartData } from "../App.types";
 import { add } from "../features/CartSlice";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +13,8 @@ import { Link } from "react-router-dom";
 const Shop = () => {
   const dispatch = useAppDispatch();
   const datas = useAppSelector((state) => state.productsList.datas);
+  const loading = useAppSelector((state) => state.productsList.loading);
+  const error = useAppSelector((state) => state.productsList.error);
   useEffect(() => {
     dispatch(getProductsDataInList());
   }, [dispatch]);
@@ -43,7 +46,10 @@ const Shop = () => {
                 Shop
               </Typography>
             </Grid>
-            {datas &&
+            {loading ? (
+              <ProductsListSkeleton />
+            ) : (
+              datas &&
               datas.map((item: productsListDatas) => (
                 <Grid item xl={4} lg={4} md={6} sm={6} xs={12} key={item.id}>
                   <Box style={{ padding: "30px" }}>
@@ -140,7 +146,24 @@ const Shop = () => {
                     </Grid>
                   </Box>
                 </Grid>
-              ))}
+              ))
+            )}
+
+            {error ? (
+              <Grid
+                item
+                xl={12}
+                lg={12}
+                md={12}
+                sm={12}
+                xs={12}
+                style={{ textAlign: "center", padding: "30px " }}
+              >
+                {error}
+              </Grid>
+            ) : (
+              ""
+            )}
           </Grid>
         </Container>
       </Box>
