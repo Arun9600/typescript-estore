@@ -40,8 +40,6 @@ export type productsDetailData = {
 
 export type cartSliceInitialState = {
   datas: [] | null;
-  loading: boolean;
-  error: string;
 };
 
 export type CartData = {

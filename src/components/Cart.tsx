@@ -30,7 +30,6 @@ const Cart = () => {
     dispatch(decreaseQty(item));
   };
   const data = useAppSelector((state) => state.cart.datas);
-  const loading = useAppSelector((state) => state.cart.loading);
   const Total = data?.reduce(
     (acc, item: CartData) =>
       (acc as number) + (item.price as number) * (item.qty || 0),
@@ -100,7 +99,7 @@ const Cart = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {loading ? (
+                        {!data ? (
                           <Skeleton variant="text" sx={{ fontSize: "1rem" }} />
                         ) : (
                           data &&

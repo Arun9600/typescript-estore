@@ -4,8 +4,6 @@ import { CartData } from "../App.types";
 
 const initialState: cartSliceInitialState = {
   datas: [],
-  loading: true,
-  error: "",
 };
 
 const CartSlice = createSlice({
@@ -18,13 +16,11 @@ const CartSlice = createSlice({
       ) as CartData | undefined;
       if (cart) {
         cart.qty = (cart.qty || 0) + 1;
-        state.loading = false;
       } else {
         (state.datas as CartData[] | undefined)?.push({
           ...action.payload,
           qty: 1,
         } as CartData);
-        state.loading = false;
       }
     },
     deleteItem: (state, action) => {
