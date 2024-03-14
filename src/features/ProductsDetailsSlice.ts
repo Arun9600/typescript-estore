@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { productsDetailsSliceInitialSlice } from "../App.types";
+import type { productsDetailsSliceInitialSlice } from "../App.types";
 import { BASE_URL } from "../utils";
 
 const initialState: productsDetailsSliceInitialSlice = {

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { limitResultsSliceInitialState } from "../App.types";
+import type { limitResultsSliceInitialState } from "../App.types";
 import { BASE_URL } from "../utils";
 
 const initialState: limitResultsSliceInitialState = {
