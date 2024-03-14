@@ -1,28 +1,28 @@
+import React from "react";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../features/hooks";
 import { getProductsDataInList } from "../features/ProductsListSlice";
-import { productsListDatas } from "../App.types";
+import type { productsListDatas, CartData } from "../App.types";
 import { productDetailsFunc } from "../features/ProductsDetailsSlice";
 import { Box, Container, Grid, Typography, Button } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ProductsListSkeleton from "./ProductsListSkeleton";
-import { CartData } from "../App.types";
 import { add } from "../features/CartSlice";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-const Shop = () => {
+const Shop: React.FC = () => {
   const dispatch = useAppDispatch();
   const datas = useAppSelector((state) => state.productsList.datas);
   const loading = useAppSelector((state) => state.productsList.loading);
   const error = useAppSelector((state) => state.productsList.error);
   useEffect(() => {
-    dispatch(getProductsDataInList());
+    void dispatch(getProductsDataInList());
   }, [dispatch]);
-  const productDetailEvent = (productId: number) => {
-    dispatch(productDetailsFunc(productId));
+  const productDetailEvent = (productId: number): void => {
+    void dispatch(productDetailsFunc(productId));
   };
-  const addToCart = (data: CartData) => {
-    dispatch(add(data));
+  const addToCart = (data: CartData): void => {
+    void dispatch(add(data));
   };
   const navigate = useNavigate();
   return (
@@ -49,8 +49,7 @@ const Shop = () => {
             {loading ? (
               <ProductsListSkeleton />
             ) : (
-              datas &&
-              datas.map((item: productsListDatas) => (
+              datas?.map((item: productsListDatas) => (
                 <Grid item xl={4} lg={4} md={6} sm={6} xs={12} key={item.id}>
                   <Box style={{ padding: "30px" }}>
                     <Box>
@@ -140,7 +139,9 @@ const Shop = () => {
                       >
                         <AddShoppingCartIcon
                           sx={{ color: "#2e7d32", cursor: "pointer" }}
-                          onClick={() => addToCart(item)}
+                          onClick={() => {
+                            addToCart(item);
+                          }}
                         />
                       </Grid>
                     </Grid>

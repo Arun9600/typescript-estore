@@ -1,31 +1,31 @@
-export type productsListDatas = {
+export interface productsListDatas {
   id: number;
   title: string;
   price: string;
   category: string;
   image: string;
-};
-export type productsSliceInitialState = {
+}
+export interface productsSliceInitialState {
   datas: [] | null;
   loading: boolean;
   error: string;
-};
-export type productsCatergoriesSliceInitialState = {
+}
+export interface productsCatergoriesSliceInitialState {
   datas: [] | null;
   loading: boolean;
   error: string;
-};
-export type limitResultsSliceInitialState = {
+}
+export interface limitResultsSliceInitialState {
   datas: [] | null;
   loading: boolean;
   error: string;
-};
-export type productsDetailsSliceInitialSlice = {
+}
+export interface productsDetailsSliceInitialSlice {
   datas: {} | null;
   loading: boolean;
   error: string;
-};
-export type productsDetailData = {
+}
+export interface productsDetailData {
   id: number;
   title: string;
   price: string;
@@ -36,16 +36,16 @@ export type productsDetailData = {
     count?: number | null;
     rate?: number | null;
   };
-};
+}
 
-export type cartSliceInitialState = {
+export interface cartSliceInitialState {
   datas: [] | null;
-};
+}
 
-export type CartData = {
+export interface CartData {
   id: number;
   title: string;
   price: string | number;
   image: string;
   qty?: number | undefined;
-};
+}

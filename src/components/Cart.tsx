@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Box,
   Container,
@@ -13,26 +14,26 @@ import {
   Skeleton,
 } from "@mui/material";
 import { useAppSelector, useAppDispatch } from "../features/hooks";
-import { CartData } from "../App.types";
+import type { CartData } from "../App.types";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { deleteItem, addQty, decreaseQty } from "../features/CartSlice";
-const Cart = () => {
+const Cart: React.FC = () => {
   const dispatch = useAppDispatch();
-  const DeleteProduct = (item: CartData) => {
-    dispatch(deleteItem(item));
+  const DeleteProduct = (item: CartData): void => {
+    void dispatch(deleteItem(item));
   };
-  const increaseQuantity = (item: CartData) => {
-    dispatch(addQty(item));
+  const increaseQuantity = (item: CartData): void => {
+    void dispatch(addQty(item));
   };
-  const decreseQuantity = (item: CartData) => {
-    dispatch(decreaseQty(item));
+  const decreseQuantity = (item: CartData): void => {
+    void dispatch(decreaseQty(item));
   };
   const data = useAppSelector((state) => state.cart.datas);
   const Total = data?.reduce(
     (acc, item: CartData) =>
-      (acc as number) + (item.price as number) * (item.qty || 0),
+      (acc as number) + (item.price as number) * (item.qty ?? 0),
     0
   );
   const subTotal = Math.round(Total as number);
@@ -64,7 +65,7 @@ const Cart = () => {
             </Grid>
           </Grid>
         </Container>
-        {data && data.length === 0 ? (
+        {data?.length === 0 ? (
           <Box>
             <Container>
               <Grid container>
@@ -102,8 +103,7 @@ const Cart = () => {
                         {!data ? (
                           <Skeleton variant="text" sx={{ fontSize: "1rem" }} />
                         ) : (
-                          data &&
-                          data.map((item: CartData) => (
+                          data?.map((item: CartData) => (
                             <TableRow
                               key={item.id}
                               style={{
@@ -136,12 +136,16 @@ const Cart = () => {
                                 >
                                   <ControlPointIcon
                                     style={{ cursor: "pointer" }}
-                                    onClick={() => increaseQuantity(item)}
+                                    onClick={() => {
+                                      increaseQuantity(item);
+                                    }}
                                   />{" "}
                                   {item.qty}{" "}
                                   <RemoveCircleOutlineIcon
                                     style={{ cursor: "pointer" }}
-                                    onClick={() => decreseQuantity(item)}
+                                    onClick={() => {
+                                      decreseQuantity(item);
+                                    }}
                                   />
                                 </Box>
                               </TableCell>
@@ -150,7 +154,9 @@ const Cart = () => {
                               </TableCell>
                               <TableCell style={{ textAlign: "center" }}>
                                 <DeleteIcon
-                                  onClick={() => DeleteProduct(item)}
+                                  onClick={() => {
+                                    DeleteProduct(item);
+                                  }}
                                   style={{ cursor: "pointer" }}
                                 />
                               </TableCell>
@@ -166,7 +172,7 @@ const Cart = () => {
           </Box>
         )}
       </Box>
-      {data && data.length === 0 ? (
+      {data?.length === 0 ? (
         ""
       ) : (
         <Box>

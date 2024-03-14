@@ -1,22 +1,23 @@
+import React from "react";
 import { Box, Container, Grid, Typography, Button } from "@mui/material";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../features/hooks";
 import { limitResultsApiFunc } from "../features/ProductsLimitSlice";
-import { productsListDatas } from "../App.types";
+import type { productsListDatas } from "../App.types";
 import { productDetailsFunc } from "../features/ProductsDetailsSlice";
 import ProductsListSkeleton from "./ProductsListSkeleton";
 import { Link } from "react-router-dom";
-const ProductsLimit = () => {
+const ProductsLimit: React.FC = () => {
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.limitResults.datas);
   const loading = useAppSelector((state) => state.limitResults.loading);
   const error = useAppSelector((state) => state.limitResults.error);
-  const productDetailEvent = (productId: number) => {
-    dispatch(productDetailsFunc(productId));
+  const productDetailEvent = (productId: number): void => {
+    void dispatch(productDetailsFunc(productId));
   };
   useEffect(() => {
-    dispatch(limitResultsApiFunc());
+    void dispatch(limitResultsApiFunc());
   }, [dispatch]);
   const navigate = useNavigate();
   return (
@@ -47,8 +48,7 @@ const ProductsLimit = () => {
             {loading ? (
               <ProductsListSkeleton />
             ) : (
-              data &&
-              data.map((item: productsListDatas) => (
+              data?.map((item: productsListDatas) => (
                 <Grid item xl={4} lg={4} md={4} sm={6} xs={12} key={item.id}>
                   <Box sx={{ padding: "30px" }}>
                     <Box>
@@ -128,7 +128,7 @@ const ProductsLimit = () => {
               ""
             )}
 
-            {data && data.length === 0 ? (
+            {data?.length === 0 ? (
               " "
             ) : (
               <>
@@ -142,7 +142,9 @@ const ProductsLimit = () => {
                   <Button
                     color="success"
                     variant="outlined"
-                    onClick={() => navigate("/shop")}
+                    onClick={() => {
+                      navigate("/shop");
+                    }}
                   >
                     View All Products
                   </Button>

@@ -1,6 +1,6 @@
+import React from "react";
 import { Box, Typography } from "@mui/material";
-
-const EmptyPage = () => {
+const EmptyPage: React.FC = () => {
   return (
     <>
       <Box sx={{ textAlign: "center", padding: "40px 0" }}>

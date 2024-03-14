@@ -1,17 +1,18 @@
+import React from "react";
 import { useAppSelector, useAppDispatch } from "../features/hooks";
 import { Typography, Box, Container, Grid, Button } from "@mui/material";
-import { productsDetailData } from "../App.types";
+import type { productsDetailData } from "../App.types";
 import { add } from "../features/CartSlice";
 import ProductsDetailsSkeleton from "./ProductsDetailsSkeleton";
-const ProductDetails = () => {
+const ProductDetails: React.FC = () => {
   const dispatch = useAppDispatch();
   const data = useAppSelector(
     (state) => state.productDetails.datas
   ) as productsDetailData;
   const loading = useAppSelector((state) => state.productDetails.loading);
   const error = useAppSelector((state) => state.productDetails.error);
-  const addToCart = (data: productsDetailData) => {
-    dispatch(add(data));
+  const addToCart = (data: productsDetailData): void => {
+    void dispatch(add(data));
   };
   return (
     <>
@@ -78,7 +79,9 @@ const ProductDetails = () => {
                   <Button
                     variant="outlined"
                     color="success"
-                    onClick={() => addToCart(data)}
+                    onClick={() => {
+                      addToCart(data);
+                    }}
                   >
                     Add to Cart
                   </Button>

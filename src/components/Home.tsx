@@ -1,16 +1,17 @@
+import React from "react";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../features/hooks";
 import { prodcutsCategoriesFunc } from "../features/ProductsCategoriesSlice";
 import ProductsLimit from "./ProductsLimit";
 import ProductsCategoriesSkeleton from "./ProductsCategoriesSkeleton";
-const Home = () => {
+const Home: React.FC = () => {
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.prodcutsCategories.datas);
   const loading = useAppSelector((state) => state.prodcutsCategories.loading);
   const error = useAppSelector((state) => state.prodcutsCategories.error);
   useEffect(() => {
-    dispatch(prodcutsCategoriesFunc());
+    void dispatch(prodcutsCategoriesFunc());
   }, [dispatch]);
 
   return (
@@ -37,8 +38,7 @@ const Home = () => {
             {loading ? (
               <ProductsCategoriesSkeleton />
             ) : (
-              data &&
-              data.map((item: string) => (
+              data?.map((item: string) => (
                 <Grid
                   item
                   xl={3}

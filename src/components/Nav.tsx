@@ -1,7 +1,8 @@
+import React from "react";
 import { Outlet } from "react-router-dom";
 import TopArea from "./TopArea";
 import Footer from "./Footer";
-const Nav = () => {
+const Nav: React.FC = () => {
   return (
     <>
       <TopArea />

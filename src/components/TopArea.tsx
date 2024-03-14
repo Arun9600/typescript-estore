@@ -1,6 +1,7 @@
+import React from "react";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import Menu from "./Menu";
-const TopArea = () => {
+const TopArea: React.FC = () => {
   return (
     <>
       <Box sx={{ backgroundColor: "#000", padding: "10px 0" }}>

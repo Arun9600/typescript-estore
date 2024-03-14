@@ -1,5 +1,6 @@
+import React from "react";
 import { Box, Grid, Skeleton } from "@mui/material";
-const ProductsListSkeleton = () => {
+const ProductsListSkeleton: React.FC = () => {
   return (
     <>
       {Array.from({ length: 6 }).map((item, index) => (

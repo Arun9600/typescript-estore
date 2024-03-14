@@ -6,7 +6,7 @@ import Shop from "./components/Shop";
 import EmptyPage from "./components/EmptyPage";
 import ProductDetails from "./components/ProductDetails";
 import Cart from "./components/Cart";
-const App = () => {
+const App: React.FC = () => {
   const theme = createTheme({
     typography: {
       fontFamily: ["Poppins", "Open Sans", "Lora"].join(","),

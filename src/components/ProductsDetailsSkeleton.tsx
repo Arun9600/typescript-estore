@@ -1,5 +1,6 @@
+import React from "react";
 import { Box, Grid, Skeleton } from "@mui/material";
-const ProductsDetailsSkeleton = () => {
+const ProductsDetailsSkeleton: React.FC = () => {
   return (
     <>
       <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
